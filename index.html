@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EnglishwithTahsin</title>
+<meta name="description" content="EnglishwithTahsin: Türkçe anlatımlı İngilizce ders videoları, ücretsiz çalışma kağıtları ve gramer e-kitabı.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dekko&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf8f3; --paper:#ffffff; --ink:#2f3a45; --muted:#6b7682; --line:#ece6dc;
+  --green:#2f6b55; --green-soft:#dcefe6; --peach:#f7dccb; --lav:#e5e1f5; --sky:#d9ecf7; --butter:#fbf0c9;
+  --accent:#e07a5f; --radius:18px; --shadow:0 6px 24px rgba(47,58,69,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Nunito",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+h1,h2,h3,.hand{font-family:"Dekko",cursive;font-weight:400;line-height:1.15}
+h2{font-size:clamp(2rem,5vw,2.7rem);margin-bottom:.4rem}
+.lead{color:var(--muted);max-width:640px;margin-bottom:2rem}
+section{padding:72px 0}
+
+/* NAV */
+header{position:sticky;top:0;z-index:20;background:rgba(251,248,243,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:"Dekko",cursive;font-size:1.6rem;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo b{color:var(--green);font-weight:400}
+.logo .dot{width:34px;height:34px;border-radius:10px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:1.1rem}
+.menu{display:flex;gap:6px;list-style:none}
+.menu a{text-decoration:none;padding:8px 14px;border-radius:999px;font-weight:600;font-size:.95rem;color:var(--muted)}
+.menu a:hover{background:var(--green-soft);color:var(--green)}
+.burger{display:none;background:none;border:0;font-size:1.6rem;cursor:pointer;color:var(--ink)}
+@media(max-width:760px){
+  .burger{display:block}
+  .menu{position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 20px 18px;display:none}
+  .menu.open{display:flex}
+  .menu a{display:block;padding:12px 14px}
+}
+
+/* HERO */
+.hero{padding:64px 0 48px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+.tag{display:inline-block;background:var(--butter);padding:6px 14px;border-radius:999px;font-weight:700;font-size:.85rem;margin-bottom:18px}
+.hero h1{font-size:clamp(2.6rem,7vw,4.2rem);margin-bottom:16px}
+.hero h1 span{color:var(--green);position:relative}
+.hero h1 span::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:12px;background:var(--peach);z-index:-1;border-radius:6px}
+.hero p{font-size:1.12rem;color:var(--muted);margin-bottom:26px;max-width:520px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:14px;font-weight:700;text-decoration:none;border:2px solid transparent;cursor:pointer;font-size:1rem;font-family:inherit;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--green);color:#fff}
+.btn-ghost{background:var(--paper);border-color:var(--line)}
+.btn[aria-disabled="true"]{opacity:.55;pointer-events:none}
+
+/* Phrase of the day card */
+.chalk{background:var(--green);color:#f4f1e8;border-radius:24px;padding:30px;box-shadow:var(--shadow);position:relative;border:10px solid #8a6a4a}
+.chalk small{font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.75;font-size:.75rem}
+.chalk .en{font-family:"Dekko",cursive;font-size:2.1rem;margin:10px 0 6px}
+.chalk .tr{opacity:.9}
+.chalk .ex{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(255,255,255,.35);font-size:.95rem}
+.chalk .ex i{opacity:.8}
+.chalk button{margin-top:18px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.35);padding:8px 14px;border-radius:10px;cursor:pointer;font-family:inherit;font-weight:700}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px;text-align:center}
+.stat b{font-family:"Dekko",cursive;font-size:2rem;font-weight:400;color:var(--green);display:block}
+.stat span{color:var(--muted);font-size:.9rem}
+
+/* VIDEOS */
+#videolar{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.chip{border:1px solid var(--line);background:var(--bg);padding:8px 16px;border-radius:999px;cursor:pointer;font-weight:700;font-family:inherit;color:var(--muted)}
+.chip.on{background:var(--green);color:#fff;border-color:var(--green)}
+.search{flex:1;min-width:200px;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-family:inherit;font-size:.95rem;background:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.vcard{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .15s, box-shadow .15s;text-align:left;font-family:inherit;color:inherit;padding:0}
+.vcard:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.thumb{aspect-ratio:16/9;background:var(--green);color:#f4f1e8;display:grid;place-items:center;position:relative;border-bottom:6px solid #8a6a4a}
+.thumb .num{font-family:"Dekko",cursive;font-size:2.4rem}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.play{position:absolute;right:12px;bottom:12px;width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#fff;font-size:1rem}
+.vbody{padding:14px 16px 18px}
+.vbody h3{font-size:1.35rem;margin-bottom:4px}
+.vbody p{color:var(--muted);font-size:.9rem}
+.badge{display:inline-block;font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:999px;margin-bottom:8px;background:var(--sky)}
+.badge.soon{background:var(--butter)}
+.empty{color:var(--muted);padding:20px 0}
+
+/* DOCS */
+.docs{display:grid;gap:12px}
+.doc{display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.doc .ic{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:1.4rem;flex-shrink:0}
+.doc .info{flex:1;min-width:0}
+.doc .info b{display:block}
+.doc .info span{color:var(--muted);font-size:.88rem}
+.doc .btn{padding:10px 16px;font-size:.92rem}
+@media(max-width:560px){.doc{flex-wrap:wrap}.doc .btn{width:100%;justify-content:center}}
+
+/* EBOOK */
+.ebook{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center;background:var(--lav);border-radius:28px;padding:44px}
+@media(max-width:820px){.ebook{grid-template-columns:1fr;padding:28px}}
+.book{aspect-ratio:3/4;background:linear-gradient(135deg,#fdf6ec,#f7dccb);border-radius:6px 18px 18px 6px;box-shadow:12px 14px 0 rgba(47,58,69,.12), inset 10px 0 0 rgba(47,58,69,.08);display:flex;flex-direction:column;justify-content:space-between;padding:26px 24px 26px 34px;max-width:300px;margin:0 auto;width:100%}
+.book .t{font-family:"Dekko",cursive;font-size:2.2rem;line-height:1.05}
+.book .s{font-size:.85rem;color:var(--muted)}
+.book .a{font-family:"Dekko",cursive;font-size:1.2rem;color:var(--green)}
+.checks{list-style:none;margin:18px 0 26px;display:grid;gap:8px}
+.checks li::before{content:"✓";color:var(--green);font-weight:800;margin-right:10px}
+
+/* CONTACT */
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.ccard{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;text-decoration:none;display:block;transition:transform .15s}
+.ccard:hover{transform:translateY(-3px)}
+.ccard .ic{font-size:1.8rem;margin-bottom:8px}
+.ccard b{font-family:"Dekko",cursive;font-size:1.5rem;font-weight:400;display:block}
+.ccard span{color:var(--muted);font-size:.92rem;word-break:break-all}
+
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.9rem;text-align:center}
+
+/* LESSON PAGE */
+.vcard{text-decoration:none;display:block}
+#lesson{padding:28px 0 72px}
+.crumb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:var(--muted);font-size:.92rem;margin-bottom:18px}
+.crumb a{text-decoration:none;font-weight:700;color:var(--green)}
+.lesson-grid{display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start}
+@media(max-width:900px){.lesson-grid{grid-template-columns:1fr}}
+.player{aspect-ratio:16/9;background:#000;border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.player iframe{width:100%;height:100%;border:0}
+.soon-msg{aspect-ratio:16/9;display:grid;place-items:center;text-align:center;padding:20px;background:var(--green);color:#f4f1e8;border-radius:20px;border:10px solid #8a6a4a}
+.soon-msg .hand{font-size:2rem}
+.lesson-head{margin:22px 0 10px}
+.lesson-head h1{font-size:clamp(2.2rem,6vw,3.2rem)}
+.lesson-head p{color:var(--muted);font-size:1.05rem}
+.lesson-desc{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-top:16px}
+.lesson-desc h3{font-size:1.5rem;margin-bottom:6px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:22px;flex-wrap:wrap}
+.side{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.side h3{font-size:1.5rem;margin-bottom:10px}
+.side a{display:flex;gap:10px;align-items:center;text-decoration:none;padding:10px;border-radius:12px}
+.side a:hover{background:var(--bg)}
+.side a.cur{background:var(--green-soft);font-weight:800}
+.side .n{font-family:"Dekko",cursive;font-size:1.2rem;color:var(--green);min-width:58px}
+.side .s{font-size:.75rem;color:var(--muted);margin-left:auto}
+.side + .side{margin-top:16px}
+.side .doc{border:0;padding:8px 0;background:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo"><span class="dot">E</span>English<b>with</b>Tahsin</a>
+    <button class="burger" aria-label="Menü" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+    <ul class="menu" id="menu">
+      <li><a href="#videolar">Dersler</a></li>
+      <li><a href="#evraklar">Evraklar</a></li>
+      <li><a href="#ekitap">E-Kitap</a></li>
+      <li><a href="#iletisim">İletişim</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- LESSON PAGE (#ders-N) -->
+<main id="lesson" hidden>
+  <div class="wrap">
+    <div class="crumb"><a href="#">← Ana sayfa</a> <span>/</span> <a href="#videolar">Dersler</a> <span>/</span> <span id="lCrumb"></span></div>
+    <div class="lesson-grid">
+      <div>
+        <div id="lMedia"></div>
+        <div class="lesson-head">
+          <span class="badge" id="lBadge"></span>
+          <h1 id="lTitle"></h1>
+          <p id="lTr"></p>
+        </div>
+        <div class="lesson-desc" id="lDescBox"><h3>Bu derste</h3><p id="lDesc"></p></div>
+        <div class="pager" id="lPager"></div>
+      </div>
+      <aside>
+        <div class="side" id="lDocsBox"><h3>Ders evrakları</h3><div id="lDocs"></div></div>
+        <div class="side"><h3>Tüm dersler</h3><div id="lList"></div></div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tag">🇬🇧 Türkçe anlatımlı İngilizce</span>
+        <h1>İngilizceyi <span>adım adım</span> öğren.</h1>
+        <p>Alfabeden ileri seviyeye ücretsiz ders videoları, indirilebilir çalışma kağıtları ve her şeyi bir arada toplayan gramer e-kitabı.</p>
+        <div class="btns">
+          <a href="#videolar" class="btn btn-primary">▶ Derslere başla</a>
+          <a href="#evraklar" class="btn btn-ghost">⬇ Ücretsiz evraklar</a>
+        </div>
+      </div>
+      <div class="chalk" aria-live="polite">
+        <small>Günün ifadesi</small>
+        <div class="en" id="pEn"></div>
+        <div class="tr" id="pTr"></div>
+        <div class="ex"><i id="pEx"></i></div>
+        <button onclick="nextPhrase()">Başka bir tane →</button>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><b id="statVideos">0</b><span>ders videosu</span></div>
+        <div class="stat"><b id="statDocs">0</b><span>indirilebilir evrak</span></div>
+        <div class="stat"><b>100%</b><span>ücretsiz dersler</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section id="videolar">
+    <div class="wrap">
+      <h2>Ders Videoları</h2>
+      <p class="lead">Dersler sırayla ilerliyor. İlk dersten başlarsan hiçbir konuyu kaçırmazsın.</p>
+      <div class="filters" id="filters"></div>
+      <div class="grid" id="videoGrid"></div>
+    </div>
+  </section>
+
+  <!-- DOCS -->
+  <section id="evraklar">
+    <div class="wrap">
+      <h2>İndirilebilir Evraklar</h2>
+      <p class="lead">Derslerle birlikte kullanabileceğin çalışma kağıtları ve kelime listeleri. Hepsi ücretsiz.</p>
+      <div class="docs" id="docList"></div>
+    </div>
+  </section>
+
+  <!-- EBOOK -->
+  <section id="ekitap">
+    <div class="wrap">
+      <div class="ebook">
+        <div class="book">
+          <div>
+            <div class="t">English Grammar E-Book</div>
+            <div class="s" style="margin-top:10px">Alfabeden ileri seviyeye</div>
+          </div>
+          <div class="a">EnglishwithTahsin</div>
+        </div>
+        <div>
+          <span class="tag" style="background:#fff">📘 Gramer e-kitabı</span>
+          <h2>Tüm gramer tek kitapta</h2>
+          <p style="color:var(--muted)">Konular Türkçe anlatılıyor, İngilizce örneklerin Türkçe çevirisi yanında. Pastel ve sakin bir tasarımla, önemli noktalar uyarı kutularında.</p>
+          <ul class="checks">
+            <li>Başlangıç seviyesine uygun, detaylı anlatım</li>
+            <li>Her konuda bol örnek cümle ve Türkçe çevirisi</li>
+            <li>Yazdırılabilir A4 PDF</li>
+          </ul>
+          <a class="btn btn-primary" id="ebookBtn" href="#">Yakında satışta</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="iletisim" style="padding-top:20px">
+    <div class="wrap">
+      <h2>Takip et & iletişim</h2>
+      <p class="lead">Kısa İngilizce ifadeler ve günlük içerikler için Instagram'a, tüm dersler için YouTube'a göz at.</p>
+      <div class="contact" id="contactCards"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="yr"></span> EnglishwithTahsin · Tüm içerikler özgündür.</div>
+</footer>
+
+
+<script>
+/* =========================================================
+   SİTE İÇERİĞİ — güncellemeler sadece bu bölümde yapılır
+   ========================================================= */
+const SITE = {
+  instagram: "https://www.instagram.com/englishwithtahsin/",
+  youtube:   "",          // YouTube kanal linki gelince buraya
+  email:     "",          // iletişim e-postası (isteğe bağlı)
+  ebookLink: ""           // Shopier / Gumroad satış linki gelince buraya
+};
+
+// youtubeId: YouTube linkindeki v= sonrası kod. Boşsa ders "Yakında" görünür.
+// desc: ders sayfasında videonun altında çıkan açıklama.
+const VIDEOS = [
+  { no: 1, title: "English Alphabet",       tr: "İngilizce Alfabe",      level: "Başlangıç", youtubeId: "",
+    desc: "İngilizce alfabedeki 26 harfi, her harfin okunuşunu ve harflerin kelimelerde nasıl farklı seslendiğini öğreneceksin." },
+  { no: 4, title: "Numbers",                tr: "Sayılar",               level: "Başlangıç", youtubeId: "",
+    desc: "İngilizce sayıları sıfırdan yüze kadar, yazılışları ve okunuşlarıyla öğreneceksin." },
+  { no: 5, title: "Asking & Giving Names",  tr: "İsim sorma ve söyleme", level: "Başlangıç", youtubeId: "",
+    desc: "Birine adını sormayı, kendi adını söylemeyi ve tanışırken kullanılan kalıpları öğreneceksin." }
+];
+
+// file: siteye yüklenen PDF'in yolu (ör. "evraklar/alfabe.pdf") veya Google Drive linki. Boşsa "Yakında".
+// lesson: evrak hangi derse aitse o dersin numarası (ders sayfasında da görünür).
+const DOCS = [
+  { title: "İngilizce Alfabe Çalışma Kağıdı", desc: "Harfler, okunuşlar ve alıştırmalar", type: "PDF", file: "", lesson: 1, color: "var(--peach)", icon: "🔤" },
+  { title: "Sayılar Çalışma Kağıdı",          desc: "1–100 arası sayılar ve alıştırmalar", type: "PDF", file: "", lesson: 4, color: "var(--sky)",   icon: "🔢" },
+  { title: "Aylık Kelime Listesi",            desc: "Her güne 10 kelime + günün ifadesi",  type: "PDF", file: "", color: "var(--green-soft)", icon: "📅" }
+];
+
+// Hero'daki "Günün ifadesi" kartı
+const PHRASES = [
+  { en: "Break the ice",        tr: "Buzları eritmek, ortamı yumuşatmak", ex: "She told a joke to break the ice. (Ortamı yumuşatmak için bir şaka yaptı.)" },
+  { en: "Piece of cake",        tr: "Çocuk oyuncağı, çok kolay",          ex: "The test was a piece of cake. (Sınav çok kolaydı.)" },
+  { en: "Hit the books",        tr: "Sıkı ders çalışmak",                 ex: "I have to hit the books tonight. (Bu gece sıkı çalışmam lazım.)" },
+  { en: "Better late than never", tr: "Geç olsun, güç olmasın",           ex: "You finally came! Better late than never. (Sonunda geldin! Geç olsun, güç olmasın.)" },
+  { en: "Under the weather",    tr: "Keyifsiz, biraz hasta",              ex: "I'm feeling a bit under the weather. (Kendimi biraz keyifsiz hissediyorum.)" }
+];
+/* ========================================================= */
+
+const $ = id => document.getElementById(id);
+$("yr").textContent = new Date().getFullYear();
+
+/* Phrase of the day */
+let pIdx = Math.floor(Date.now()/86400000) % PHRASES.length;
+function showPhrase(){ const p = PHRASES[pIdx]; $("pEn").textContent = p.en; $("pTr").textContent = p.tr; $("pEx").textContent = p.ex; }
+function nextPhrase(){ pIdx = (pIdx+1) % PHRASES.length; showPhrase(); }
+showPhrase();
+
+/* Stats */
+$("statVideos").textContent = VIDEOS.filter(v=>v.youtubeId).length || VIDEOS.length;
+$("statDocs").textContent = DOCS.length;
+
+/* Videos */
+const levels = ["Tümü", ...new Set(VIDEOS.map(v=>v.level))];
+let curLevel = "Tümü", query = "";
+function renderFilters(){
+  const f = $("filters"); f.innerHTML = "";
+  levels.forEach(l=>{
+    const b = document.createElement("button");
+    b.className = "chip" + (l===curLevel?" on":""); b.textContent = l;
+    b.onclick = ()=>{ curLevel = l; renderFilters(); renderVideos(); };
+    f.appendChild(b);
+  });
+  const s = document.createElement("input");
+  s.className = "search"; s.placeholder = "Konu ara… (ör. numbers)"; s.value = query;
+  s.oninput = e=>{ query = e.target.value.toLowerCase(); renderVideos(); };
+  f.appendChild(s);
+}
+function renderVideos(){
+  const g = $("videoGrid"); g.innerHTML = "";
+  const list = VIDEOS.filter(v => (curLevel==="Tümü"||v.level===curLevel) &&
+    (v.title+" "+v.tr).toLowerCase().includes(query)).sort((a,b)=>a.no-b.no);
+  if(!list.length){ g.innerHTML = '<p class="empty">Bu aramaya uygun ders bulunamadı.</p>'; return; }
+  list.forEach(v=>{
+    const c = document.createElement("a"); c.className = "vcard"; c.href = "#ders-" + v.no;
+    const img = v.youtubeId ? `<img loading="lazy" alt="" src="https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg" onerror="this.remove()">` : "";
+    c.innerHTML = `
+      <div class="thumb">${img}<span class="num">Ders ${v.no}</span><span class="play">▶</span></div>
+      <div class="vbody">
+        <span class="badge ${v.youtubeId?"":"soon"}">${v.youtubeId ? v.level : "Yakında"}</span>
+        <h3>${v.title}</h3><p>${v.tr}</p>
+      </div>`;
+    g.appendChild(c);
+  });
+}
+renderFilters(); renderVideos();
+
+/* Docs */
+function docEl(d){
+  const el = document.createElement("div"); el.className = "doc";
+  el.innerHTML = `
+    <div class="ic" style="background:${d.color}">${d.icon}</div>
+    <div class="info"><b>${d.title}</b><span>${d.desc} · ${d.type}</span></div>
+    ${d.file ? `<a class="btn btn-primary" href="${d.file}" target="_blank" rel="noopener" download>⬇ İndir</a>`
+             : `<span class="btn btn-ghost" aria-disabled="true">Yakında</span>`}`;
+  return el;
+}
+DOCS.forEach(d=>$("docList").appendChild(docEl(d)));
+
+/* Lesson page — her dersin kendi sayfası: #ders-1, #ders-4 ... */
+const sorted = [...VIDEOS].sort((a,b)=>a.no-b.no);
+function showLesson(no){
+  const i = sorted.findIndex(v=>v.no===no);
+  if(i<0) return false;
+  const v = sorted[i];
+  document.title = `Ders ${v.no}: ${v.title} · EnglishwithTahsin`;
+  $("lCrumb").textContent = `Ders ${v.no}`;
+  $("lMedia").innerHTML = v.youtubeId
+    ? `<div class="player"><iframe src="https://www.youtube-nocookie.com/embed/${v.youtubeId}?rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${v.title}"></iframe></div>`
+    : `<div class="soon-msg"><div><div class="hand">Bu ders çok yakında burada!</div><p style="margin-top:8px;opacity:.85">Yeni dersleri kaçırmamak için takipte kal.</p></div></div>`;
+  $("lBadge").textContent = v.youtubeId ? v.level : "Yakında";
+  $("lBadge").className = "badge" + (v.youtubeId ? "" : " soon");
+  $("lTitle").textContent = `Ders ${v.no} · ${v.title}`;
+  $("lTr").textContent = v.tr;
+  $("lDesc").textContent = v.desc || "";
+  $("lDescBox").hidden = !v.desc;
+  const prev = sorted[i-1], next = sorted[i+1];
+  $("lPager").innerHTML =
+    (prev ? `<a class="btn btn-ghost" href="#ders-${prev.no}">← Ders ${prev.no}: ${prev.title}</a>` : `<span></span>`) +
+    (next ? `<a class="btn btn-primary" href="#ders-${next.no}">Ders ${next.no}: ${next.title} →</a>` : ``);
+  const docs = DOCS.filter(d=>d.lesson===v.no);
+  $("lDocs").innerHTML = ""; docs.forEach(d=>$("lDocs").appendChild(docEl(d)));
+  $("lDocsBox").hidden = !docs.length;
+  $("lList").innerHTML = sorted.map(x=>
+    `<a href="#ders-${x.no}" class="${x.no===v.no?"cur":""}"><span class="n">Ders ${x.no}</span>${x.title}${x.youtubeId?"":'<span class="s">Yakında</span>'}</a>`).join("");
+  return true;
+}
+let lastHomeHash = "";
+function route(){
+  const m = location.hash.match(/^#ders-(\d+)$/);
+  const onLesson = m && showLesson(+m[1]);
+  $("lesson").hidden = !onLesson;
+  $("top").hidden = !!onLesson;
+  if(onLesson){ window.scrollTo(0,0); }
+  else {
+    document.title = "EnglishwithTahsin";
+    const t = location.hash && document.querySelector(location.hash.replace(/[^#\w-]/g,""));
+    if(t) t.scrollIntoView(); else window.scrollTo(0,0);
+  }
+}
+window.addEventListener("hashchange", route);
+route();
+
+/* E-book */
+if(SITE.ebookLink){ const b=$("ebookBtn"); b.href=SITE.ebookLink; b.target="_blank"; b.rel="noopener"; b.textContent="Satın al →"; }
+else { $("ebookBtn").setAttribute("aria-disabled","true"); }
+
+/* Contact */
+const cards = [
+  { icon:"📸", name:"Instagram", sub:"@englishwithtahsin", href:SITE.instagram },
+  { icon:"▶️", name:"YouTube",   sub: SITE.youtube ? "Tüm ders videoları" : "Kanal linki yakında", href:SITE.youtube },
+  { icon:"✉️", name:"E-posta",   sub: SITE.email || "Yakında", href: SITE.email ? "mailto:"+SITE.email : "" }
+];
+cards.forEach(c=>{
+  const a = document.createElement(c.href ? "a" : "div"); a.className = "ccard";
+  if(c.href){ a.href = c.href; a.target="_blank"; a.rel="noopener"; }
+  a.innerHTML = `<div class="ic">${c.icon}</div><b>${c.name}</b><span>${c.sub}</span>`;
+  $("contactCards").appendChild(a);
+});
+
+/* close mobile menu on link click */
+document.querySelectorAll("#menu a").forEach(a=>a.addEventListener("click",()=>$("menu").classList.remove("open")));
+</script>
+</body>
+</html>
