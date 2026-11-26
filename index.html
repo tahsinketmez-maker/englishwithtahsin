@@ -123,6 +123,12 @@ header{position:sticky;top:0;z-index:20;background:rgba(251,248,243,.92);backdro
 
 footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.9rem;text-align:center}
 
+/* LESSONS-ONLY PAGE (#dersler) */
+body.only-lessons #top > section:not(#videolar){display:none}
+body.only-lessons #videolar{border-top:0}
+.back-home{display:none;margin-bottom:14px;font-weight:700;color:var(--green);text-decoration:none}
+body.only-lessons .back-home{display:inline-block}
+
 /* LESSON PAGE */
 .vcard{text-decoration:none;display:block}
 #lesson{padding:28px 0 72px}
@@ -158,7 +164,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
     <a href="#top" class="logo"><span class="dot">E</span>English<b>with</b>Tahsin</a>
     <button class="burger" aria-label="Menü" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
     <ul class="menu" id="menu">
-      <li><a href="#videolar">Dersler</a></li>
+      <li><a href="#dersler" target="_blank" rel="noopener">Dersler</a></li>
       <li><a href="#evraklar">Evraklar</a></li>
       <li><a href="#ekitap">E-Kitap</a></li>
       <li><a href="#iletisim">İletişim</a></li>
@@ -169,7 +175,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
 <!-- LESSON PAGE (#ders-N) -->
 <main id="lesson" hidden>
   <div class="wrap">
-    <div class="crumb"><a href="#">← Ana sayfa</a> <span>/</span> <a href="#videolar">Dersler</a> <span>/</span> <span id="lCrumb"></span></div>
+    <div class="crumb"><a href="#">← Ana sayfa</a> <span>/</span> <a href="#dersler">Dersler</a> <span>/</span> <span id="lCrumb"></span></div>
     <div class="lesson-grid">
       <div>
         <div id="lMedia"></div>
@@ -198,7 +204,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
         <h1>İngilizceyi <span>adım adım</span> öğren.</h1>
         <p>Alfabeden ileri seviyeye ücretsiz ders videoları, indirilebilir çalışma kağıtları ve her şeyi bir arada toplayan gramer e-kitabı.</p>
         <div class="btns">
-          <a href="#videolar" class="btn btn-primary">▶ Derslere başla</a>
+          <a href="#dersler" target="_blank" rel="noopener" class="btn btn-primary">▶ Derslere başla</a>
           <a href="#evraklar" class="btn btn-ghost">⬇ Ücretsiz evraklar</a>
         </div>
       </div>
@@ -222,6 +228,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
   <!-- VIDEOS -->
   <section id="videolar">
     <div class="wrap">
+      <a href="#" class="back-home">← Ana sayfa</a>
       <h2>Ders Videoları</h2>
       <p class="lead">Dersler sırayla ilerliyor. İlk dersten başlarsan hiçbir konuyu kaçırmazsın.</p>
       <div class="filters" id="filters"></div>
@@ -355,6 +362,7 @@ function renderVideos(){
   if(!list.length){ g.innerHTML = '<p class="empty">Bu aramaya uygun ders bulunamadı.</p>'; return; }
   list.forEach(v=>{
     const c = document.createElement("a"); c.className = "vcard"; c.href = "#ders-" + v.no;
+    if(!document.body.classList.contains("only-lessons")){ c.target = "_blank"; c.rel = "noopener"; }
     const img = v.youtubeId ? `<img loading="lazy" alt="" src="https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg" onerror="this.remove()">` : "";
     c.innerHTML = `
       <div class="thumb">${img}<span class="num">Ders ${v.no}</span><span class="play">▶</span></div>
@@ -407,16 +415,19 @@ function showLesson(no){
     `<a href="#ders-${x.no}" class="${x.no===v.no?"cur":""}"><span class="n">Ders ${x.no}</span>${x.title}${x.youtubeId?"":'<span class="s">Yakında</span>'}</a>`).join("");
   return true;
 }
-let lastHomeHash = "";
 function route(){
   const m = location.hash.match(/^#ders-(\d+)$/);
+  const lessonsOnly = location.hash === "#dersler";
+  if(document.body.classList.contains("only-lessons") !== lessonsOnly){
+    document.body.classList.toggle("only-lessons", lessonsOnly); renderVideos();
+  }
   const onLesson = m && showLesson(+m[1]);
   $("lesson").hidden = !onLesson;
   $("top").hidden = !!onLesson;
   if(onLesson){ window.scrollTo(0,0); }
   else {
-    document.title = "EnglishwithTahsin";
-    const t = location.hash && document.querySelector(location.hash.replace(/[^#\w-]/g,""));
+    document.title = lessonsOnly ? "Dersler · EnglishwithTahsin" : "EnglishwithTahsin";
+    const t = location.hash && !lessonsOnly && document.querySelector(location.hash.replace(/[^#\w-]/g,""));
     if(t) t.scrollIntoView(); else window.scrollTo(0,0);
   }
 }
